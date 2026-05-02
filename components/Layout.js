@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import BottomNav from "./BottomNav";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: "⚡" },
@@ -14,7 +15,8 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-black text-white flex">
-      <aside className="w-56 bg-gray-950 border-r border-gray-800 flex flex-col py-8 px-4 fixed h-full">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-56 bg-gray-950 border-r border-gray-800 flex-col py-8 px-4 fixed h-full">
         <div className="mb-10">
           <h1 className="text-green-400 font-bold text-lg leading-tight">
             NEXT LEVEL<br />FOOTBALL
@@ -47,7 +49,13 @@ export default function Layout({ children }) {
         </Link>
       </aside>
 
-      <main className="ml-56 flex-1 p-8">{children}</main>
+      {/* Main content */}
+      <main className="md:ml-56 flex-1 p-8 pb-32 md:pb-8">{children}</main>
+
+      {/* Mobile bottom nav */}
+      <div className="md:hidden">
+        <BottomNav />
+      </div>
     </div>
   );
 }
